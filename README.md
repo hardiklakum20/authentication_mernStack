@@ -63,16 +63,24 @@ cd authantication_mernStack
 ```
 
 ### 2️⃣ Setup Backend
-cd server
+```bash
+cd backend
 npm install
-
-PORT=5000
+```
+### .env
+```bash
+PORT=8080
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret_key
+```
 
+```bash
 npm start
+```
 
 ### 3️⃣ Setup Frontend
+```bash
 cd ../client
 npm install
 npm start
+```
