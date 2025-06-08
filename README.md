@@ -5,7 +5,7 @@ A full-stack authentication system built with **MongoDB**, **Express.js**, **Rea
 ---
 
 ## 📁 Project Structure
-
+```
 ├── frontend/ # React frontend
 │ ├── pages/ # Login, Signup, Home
 │ ├── App.jsx # Frontend routes and authentication logic
@@ -19,6 +19,7 @@ A full-stack authentication system built with **MongoDB**, **Express.js**, **Rea
 │ └── ...
 ├── README.md
 └── package.json
+```
 
 
 ---
