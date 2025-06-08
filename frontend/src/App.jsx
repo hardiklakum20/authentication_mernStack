@@ -1,0 +1,48 @@
+import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
+import './App.css'
+import SignUp from './pages/SignUp.jsx'
+import Login from './pages/Login.jsx'
+import Home from './pages/Home.jsx'
+import { useState } from 'react'
+import { useEffect } from 'react'
+
+function App() {
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const PrivateRoute = ({ element }) => {
+    return isAuthenticated ? element : <Navigate to={'/login'} replace />
+  }
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    const isAuthPage =
+      location.pathname === '/login' ||
+      location.pathname === '/signup' ||
+      location.pathname === '/';
+
+    if (token) {
+      setIsAuthenticated(true);
+      if (isAuthPage) {
+        navigate('/home', { replace: true });
+      }
+    } else {
+      setIsAuthenticated(false);
+      navigate('/login', { replace: true });
+    }
+  }, [location.pathname, navigate]);
+
+  return (
+    <>
+      <Routes>
+        <Route path='/' element={<Navigate to={'/login'} />} />
+        <Route path='/signup' element={<SignUp />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/home' element={<PrivateRoute isAuthenticated={isAuthenticated} element={<Home />} />} />
+      </Routes>
+    </>
+  )
+}
+
+export default App
