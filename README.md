@@ -7,18 +7,18 @@ Copy
 Edit
 authantication_mernStack/
 │
-├── frontend/          # React frontend
-│   ├── pages/       # Login, Signup, Home
-│   ├── App.jsx      # Frontend routes and authentication logic
-│   └── ...
+├── frontend/ # React frontend
+│ ├── pages/ # Login, Signup, Home
+│ ├── App.jsx # Frontend routes and authentication logic
+│ └── ...
 │
-├── backend/          # Node.js backend
-│   ├── controllers/
-│   ├── models/
-│   ├── routes/
-│   ├── server.js
-│   ├── .env
-│   └── ...
+├── backend/ # Node.js backend
+│ ├── controllers/
+│ ├── models/
+│ ├── routes/
+│ ├── server.js
+│ ├── .env
+│ └── ...
 │
 ├── README.md
 └── package.json
@@ -49,13 +49,14 @@ MongoDB (Cloud or Local)
 ✅ Password hashing using Bcrypt
 
 📦 Installation
+
 1. Clone the repository
-git clone https://github.com/hardiklakum20/authantication_mernStack.git
-cd authantication_mernStack
+   git clone https://github.com/hardiklakum20/authantication_mernStack.git
+   cd authantication_mernStack
 
 2. Setup Backend
-cd backend
-npm install
+   cd backend
+   npm install
 
 Create a .env file inside /backend:
 PORT=5000
@@ -66,6 +67,6 @@ Then run the server:
 npm start
 
 3. Setup Frontend
-cd ../frontend
-npm install
-npm start
+   cd ../frontend
+   npm install
+   npm start
