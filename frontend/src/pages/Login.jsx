@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { toast, ToastContainer } from 'react-toastify';
 import axios from 'axios';
 
@@ -31,7 +31,7 @@ function Login() {
             } else if (!success) {
                 toast.error(message || "Login failed");
             }
-            console.log(result);
+            // console.log(err);
         } catch (err) {
             toast.error(err);
             console.error("Signup error:", err);

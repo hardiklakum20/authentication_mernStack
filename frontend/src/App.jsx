@@ -29,7 +29,9 @@ function App() {
       }
     } else {
       setIsAuthenticated(false);
-      navigate('/login', { replace: true });
+      if (!isAuthPage) {
+        navigate('/login', { replace: true });
+      }
     }
   }, [location.pathname, navigate]);
 

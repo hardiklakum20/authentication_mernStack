@@ -6,8 +6,8 @@ const signup = async (req, res) => {
     try {
         const { name, email, password } = req.body;
 
-        const user = userModel.findOne({ email })
-        if (!user) {
+        const user = await userModel.findOne({ email })
+        if (user) {
             return res.status(409)
                 .json({ message: "User already exists" })
         }
@@ -22,6 +22,7 @@ const signup = async (req, res) => {
             .json({ message: error.message, success: false })
     }
 }
+
 
 const login = async (req, res) => {
     try {
