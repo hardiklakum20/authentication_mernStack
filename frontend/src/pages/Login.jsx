@@ -11,31 +11,21 @@ function Login() {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        if (!email || !password) {
-            return toast.error('email and password are required')
-        }
         try {
             const url = `http://localhost:8080/auth/login`;
             const response = await axios.post(url, { email, password });
-            const { success, message, jwtToken, name, error } = response.data;
-            if (success) {
-                toast.success(message);
-                localStorage.setItem('token', jwtToken);
-                localStorage.setItem('loggedInUser', name);
+            console.log(response);
+            if (response.status === 200) {
+                toast.success(response.data.message);
+                localStorage.setItem('token', response.data.jwtToken);
+                localStorage.setItem('loggedInUser', response.data.name);
                 setTimeout(() => {
                     navigate('/home')
-                }, 1000)
-            } else if (error) {
-                const details = error?.details[0].message || "Something went wrong";
-                toast.error(details);
-            } else if (!success) {
-                toast.error(message || "Login failed");
+                }, 1500)
             }
-            // console.log(err);
         } catch (err) {
-            toast.error(err);
-            console.error("Signup error:", err);
-
+            console.error(err);
+            toast.error(err.response?.data || "Login failed");
         }
     }
 
@@ -62,6 +52,7 @@ function Login() {
                     />
                 </div>
                 <button type='submit'>Login</button>
+                <Link to="/forgot-password">Forgot Password</Link>
                 <span>Does't have an account ?
                     <Link to="/signup">Signup</Link>
                 </span>

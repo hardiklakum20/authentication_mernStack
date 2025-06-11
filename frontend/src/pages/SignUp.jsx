@@ -14,29 +14,19 @@ function Signup() {
 
     const handleSignup = async (e) => {
         e.preventDefault();
-
-        if (!name || !email || !password) {
-            return toast.error('name, email and password are required')
-        }
         try {
             const url = `http://localhost:8080/auth/signup`;
+
             const response = await axios.post(url, { name, email, password });
-            const { success, message, error } = response.data;
-            if (success) {
-                toast.success(message);
+            if (response.status === 200) {
+                toast.success(response.data);
                 setTimeout(() => {
-                    navigate('/login')
-                }, 1000)
-            } else if (error) {
-                const details = error?.details[0].message || "Something went wrong";
-                toast.error(details);
-            } else if (!success) {
-                toast.error(message || "Signup failed");
+                    navigate('/login');
+                }, 1500);
             }
-            console.log(result);
         } catch (err) {
-            toast.error(err.message || "Something went wrong");
-            console.error("Signup error:", err);
+            console.error(err);
+            toast.error(err.response?.data || "Registration failed");
         }
     }
     return (

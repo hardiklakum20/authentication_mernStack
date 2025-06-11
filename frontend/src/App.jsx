@@ -5,6 +5,8 @@ import Login from './pages/Login.jsx'
 import Home from './pages/Home.jsx'
 import { useState } from 'react'
 import { useEffect } from 'react'
+import ForgotPassword from './pages/ForgotPassword.jsx'
+import ChangePassword from './pages/ChangePassword.jsx'
 
 function App() {
 
@@ -13,14 +15,15 @@ function App() {
   const navigate = useNavigate();
 
   const PrivateRoute = ({ element }) => {
-    return isAuthenticated ? element : <Navigate to={'/login'} replace />
+    return isAuthenticated ? element : <Navigate to={'/login'} />
   }
   useEffect(() => {
     const token = localStorage.getItem('token');
     const isAuthPage =
       location.pathname === '/login' ||
       location.pathname === '/signup' ||
-      location.pathname === '/';
+      location.pathname === '/' ||
+      location.pathname === '/forgot-password';
 
     if (token) {
       setIsAuthenticated(true);
@@ -42,6 +45,8 @@ function App() {
         <Route path='/signup' element={<SignUp />} />
         <Route path='/login' element={<Login />} />
         <Route path='/home' element={<PrivateRoute isAuthenticated={isAuthenticated} element={<Home />} />} />
+        <Route path='/forgot-password' element={<ForgotPassword />} />
+        <Route path='/change-password' element={<ChangePassword />} />
       </Routes>
     </>
   )

@@ -9,17 +9,18 @@ const signup = async (req, res) => {
         const user = await userModel.findOne({ email })
         if (user) {
             return res.status(409)
-                .json({ message: "User already exists" })
+                .send("User already exists");
         }
         const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = new userModel({ name, email, password: hashedPassword });
+        const newUser = await new userModel({ name, email, password: hashedPassword });
         await newUser.save();
 
-        res.status(201).json({ message: 'Signup Success', success: true });
+        res.status(200).send('Signup Success');
 
     } catch (error) {
+        console.log(error);
         res.status(500)
-            .json({ message: error.message, success: false })
+            .send(error)
     }
 }
 
@@ -30,13 +31,13 @@ const login = async (req, res) => {
         const user = await userModel.findOne({ email });
         if (!user) {
             return res.status(403)
-                .json({ message: "User does not exist" });
+                .send("User does not exist");
         }
 
         const isPassword = await bcrypt.compare(password, user.password);
         if (!isPassword) {
             return res.status(403)
-                .json({ message: "Password is incorrect" });
+                .send("Password is incorrect");
         }
 
         const jwtToken = jwt.sign(
@@ -45,7 +46,7 @@ const login = async (req, res) => {
             { expiresIn: '1d' }
         );
 
-        res.status(200).json({
+        res.status(200).send({
             message: 'Login Success',
             success: true,
             jwtToken,
@@ -61,5 +62,52 @@ const login = async (req, res) => {
     }
 };
 
+const forgotPassword = async (req, res) => {
+    try {
+        const { email, newPassword } = req.body;
+    
+        const user = await userModel.findOne({ email });
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
+    
+        const hashPassword = await bcrypt.hash(newPassword, 10);
+        await userModel.findByIdAndUpdate(user._id, { password: hashPassword });
+    
+        res.status(200).send('Password update successfully');
+    } catch (error) {
+        console.log(error);
+        res.status(500).send(error.message || 'Something went wrong');
+    }
+}
 
-module.exports = { login, signup }
+const changePassword = async (req, res) => {
+    const userId = req.user.id
+
+    const user = await userModel.findById(userId);
+    if (!user) {
+        return res.status(404).send("User not found");
+    }
+
+    try {
+        const { oldPassword, newPassword } = req.body
+
+        const isPassword = await bcrypt.compare(oldPassword, user.password);
+        if (!isPassword) {
+            return res.status(403)
+                .send("Old Password is incorrect");
+        }
+
+        const hashPassword = await bcrypt.hash(newPassword, 10);
+        await userModel.findByIdAndUpdate(user._id, { password: hashPassword });
+
+        res.status(200).send('Password changed successfully');
+    } catch (error) {
+        console.log(error);
+        res.status(500).send(error.message);
+
+    }
+}
+
+
+module.exports = { login, signup, forgotPassword, changePassword }
