@@ -26,6 +26,17 @@ const loginValidation = (req, res, next) => {
 const forgotValidation = (req, res, next) => {
     const schema = Joi.object({
         email: Joi.string().min(4).required(),
+        // newPassword: Joi.string().min(4).required(),
+        // confirmPassword: Joi.string().min(4).valid(Joi.ref('newPassword')).required()
+        //     .messages({ 'any.only': 'confirmPassword must match newPassword' })
+    })
+
+    const { error } = schema.validate(req.body);
+    if (error) return res.status(400).send(error.details[0].message);
+    next();
+}
+const resetValidation = (req, res, next) => {
+    const schema = Joi.object({
         newPassword: Joi.string().min(4).required(),
         confirmPassword: Joi.string().min(4).valid(Joi.ref('newPassword')).required()
             .messages({ 'any.only': 'confirmPassword must match newPassword' })
@@ -49,4 +60,4 @@ const changeValidation = (req, res, next) => {
     next();
 }
 
-module.exports = { signupValidation, loginValidation, forgotValidation, changeValidation }
+module.exports = { signupValidation, loginValidation, forgotValidation, changeValidation, resetValidation }

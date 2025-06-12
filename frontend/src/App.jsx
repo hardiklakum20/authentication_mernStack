@@ -7,6 +7,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import ForgotPassword from './pages/ForgotPassword.jsx'
 import ChangePassword from './pages/ChangePassword.jsx'
+import ResetPassword from './pages/ResetPassword.jsx'
 
 function App() {
 
@@ -23,7 +24,8 @@ function App() {
       location.pathname === '/login' ||
       location.pathname === '/signup' ||
       location.pathname === '/' ||
-      location.pathname === '/forgot-password';
+      location.pathname === '/forgot-password' ||
+      location.pathname.startsWith('/reset-password/');
 
     if (token) {
       setIsAuthenticated(true);
@@ -46,6 +48,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/home' element={<PrivateRoute isAuthenticated={isAuthenticated} element={<Home />} />} />
         <Route path='/forgot-password' element={<ForgotPassword />} />
+        <Route path='/reset-password/:token' element={<ResetPassword />} />
         <Route path='/change-password' element={<ChangePassword />} />
       </Routes>
     </>
