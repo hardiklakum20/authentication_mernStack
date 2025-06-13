@@ -13,7 +13,7 @@ function ResetPassword() {
         e.preventDefault();
 
         try {
-            const url = `http://localhost:8080/auth/reset-password/${token}`;
+            const url = `https://authentication-mern-stack-api.vercel.app/auth/reset-password/${token}`;
 
             const response = await axios.post(url, { newPassword, confirmPassword });
             if (response.status === 200) {
