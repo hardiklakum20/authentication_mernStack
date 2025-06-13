@@ -12,7 +12,7 @@ function Login() {
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
-            const url = `http://localhost:8080/auth/login`;
+            const url = `https://authentication-mern-stack-api.vercel.app/auth/login`;
             const response = await axios.post(url, { email, password });
             console.log(response);
             if (response.status === 200) {
