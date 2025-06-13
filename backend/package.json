@@ -4,13 +4,9 @@
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
-    "start": "nodemon index.js",
-    "vercel-build": "echo \"No build needed for backend\""
+    "start": "node index.js",
+    "vercel-build": "echo 'No build needed'"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "dependencies": {
     "bcrypt": "^6.0.0",
     "body-parser": "^2.2.0",
