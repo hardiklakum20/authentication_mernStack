@@ -14,7 +14,7 @@ function ChangePassword() {
         e.preventDefault();
         const token = localStorage.getItem('token');
         try {
-            const response = await axios.post('http://localhost:8080/auth/change-password', { oldPassword, newPassword, confirmPassword }, {
+            const response = await axios.post('https://authentication-mern-stack-api.vercel.app/auth/change-password', { oldPassword, newPassword, confirmPassword }, {
                 headers: {
                     Authorization: token
                 }
