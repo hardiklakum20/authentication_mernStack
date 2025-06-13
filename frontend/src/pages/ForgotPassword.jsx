@@ -12,7 +12,7 @@ function ForgotPassword() {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:8080/auth/forgot-password', { email });
+            const response = await axios.post('https://authentication-mern-stack-api.vercel.app/auth/forgot-password', { email });
             if (response.status === 200) {
                 toast.success(response.data);
                 // setTimeout(() => {
