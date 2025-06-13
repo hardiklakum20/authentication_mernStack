@@ -54,7 +54,7 @@ function Home() {
                 <ul>
                     {
                         product.map((product) => (
-                            <li key={product.id}>{product.name}: {product.price} onClick(state:product)</li>
+                            <li key={product.id}>{product.name}: {product.price}</li>
                         ))
                     }
                 </ul>
