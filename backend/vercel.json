@@ -14,8 +14,8 @@
     ]    
     "rewrites": [
         {
-          "source": "/reset-password/:token",
-          "destination": "/"
+          "src": "/reset-password/:token",
+          "dest": "/"
         }
     ]    
 }
