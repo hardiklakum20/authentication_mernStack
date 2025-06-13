@@ -109,7 +109,7 @@ const forgotPassword = async (req, res) => {
         user.resetPasswordExpire = Date.now() + 3600000;
         await user.save();
 
-        const url = `http://localhost:5173/reset-password/${token}`;
+        const url = `https://authentication-mern-stack-ui.vercel.app/reset-password/${token}`;
 
         const mailOptions = {
             from: process.env.EMAIL,
