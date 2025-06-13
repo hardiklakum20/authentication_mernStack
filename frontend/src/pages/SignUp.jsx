@@ -15,7 +15,7 @@ function Signup() {
     const handleSignup = async (e) => {
         e.preventDefault();
         try {
-            const url = `http://localhost:8080/auth/signup`;
+            const url = `https://authentication-mern-stack-api.vercel.app/auth/signup`;
 
             const response = await axios.post(url, { name, email, password });
             if (response.status === 200) {
