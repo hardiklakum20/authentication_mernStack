@@ -26,7 +26,7 @@ function Home() {
 
     const fetchProduct = async () => {
         try {
-            const url = `https://authentication-mern-stack-api.vercel.app/products`;
+            const url = `${import.meta.env.VITE_API_URL}/auth/products`;
             const headers = {
                 headers: {
                     'Authorization': localStorage.getItem('token')

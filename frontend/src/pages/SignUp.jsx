@@ -15,7 +15,7 @@ function Signup() {
     const handleSignup = async (e) => {
         e.preventDefault();
         try {
-            const url = `https://authentication-mern-stack-api.vercel.app/auth/signup`;
+            const url = `${import.meta.env.VITE_API_URL}/auth/signup`;
 
             const response = await axios.post(url, { name, email, password });
             if (response.status === 200) {
