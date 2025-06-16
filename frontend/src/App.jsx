@@ -25,7 +25,7 @@ function App() {
       location.pathname === '/signup' ||
       location.pathname === '/' ||
       location.pathname === '/forgot-password' ||
-      location.pathname.startsWith('/reset-password/');
+      location.pathname.startsWith('/reset-password');
 
     if (token) {
       setIsAuthenticated(true);
